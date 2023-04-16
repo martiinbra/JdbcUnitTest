@@ -1,0 +1,17 @@
+version: "3.8"
+services:
+  mysql-db:
+    image: mysql:5.7
+    container_name: eva-01
+    volumes:
+      - jdbc-inventory-data:/var/lib/mysql
+      - ./mysql/tables.sql:/docker-entrypoint-initdb.d/tables.sql
+      - ./mysql/storeProcedures.sql:/docker-entrypoint-initdb.d/storeProcedures.sql
+    ports:
+      -  "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: sasa
+      MYSQL_DATABASE: jdbcEjemplo
+volumes:
+  jdbc-inventory-data:
+    external: false
